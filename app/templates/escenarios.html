@@ -1,0 +1,39 @@
+{% extends "./index.html" %}
+
+{% block title %}ESCENARIOS{% endblock %}
+
+{% block body %}
+
+<link rel="stylesheet" href="{{ url_for("static", filename="css/escenarios.css") }}">
+
+    <h1>ANÁLISIS DE ESCENARIOS</h1> 
+
+    <form action="/analisis_escenarios" class="form" method="post">
+        <p class="title">ANÁLISIS DE ESCENARIOS </p>
+            <div class="flex">
+            <label>
+                <input class="input" type="file" placeholder="">
+                <span>Archivo</span>
+            </label>
+        </div>  
+                
+        <label>
+            <input class="input" type="text" name="input" required>
+            <span>Input</span>
+        </label> 
+            
+        <button type="submit">
+            <span class="button_top"> Enviar </span>
+        </button>
+
+        
+        <label>
+            <input class="input" type="text" name="Output" placeholder="">
+            <span>Output</span>
+            {% for c in chat %}
+                <p>{{ c }}</p>
+            {% endfor %}
+        </label>
+    </form>
+
+{% endblock %}
