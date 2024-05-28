@@ -7,7 +7,7 @@ import os
 
 conversation = []
 
-def init_app(Debug=False):
+def init_app():
     # Carga las variables de entorno
     load_dotenv()
 
