@@ -1,9 +1,28 @@
-{% extends "./index.html" %}
+{% extends "./index.html" %} 
 
-{% block title %}ELICITACIÓN{% endblock %}
+{% block title %} ELICITACIÓN {% endblock %}
 
-{% block body %}
 
-    <h1>ASISTENTE DE ELICITACIÓN</h1> 
+{%block body %}
 
+<link rel="stylesheet" href="{{ url_for("static", filename="css/chat.css") }}">
+
+    <h1>ASISTENTE DE ELICITACIÓN</h1>
+
+    <div class="chat-container">
+        <div id="chat-box"></div>
+        <input
+            type="text"
+            id="user-input"
+            placeholder="Escribe tu mensaje aquí..."
+            autofocus
+        />
+        <button class="chat-button" id="chat-submit">Enviar</button>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/chat_elicitacion.js') }}"></script>
 {% endblock %}
+
+
+
+
