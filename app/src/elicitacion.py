@@ -14,7 +14,7 @@ def consult(user_message, thread_id, openAI):
     run = client.beta.threads.runs.create_and_poll(
         thread_id=thread_id,
         assistant_id=assistant_id,
-        instructions="Please address the user as Sam"
+        instructions="Please address the user as Dev"
     )
 
     if run.status == 'completed': 

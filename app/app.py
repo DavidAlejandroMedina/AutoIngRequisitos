@@ -1,7 +1,7 @@
 import os
 from app.api_info import OpenAIClient
 from app.src.elicitacion import consult, create_thread
-from flask import Flask, jsonify, render_template, request, session
+from flask import Flask, Response, jsonify, render_template, request, session
 from .src.escenarios import search
 
 
@@ -22,7 +22,7 @@ def init_app(Debug=False):
 
         
     @app.route('/chat', methods=['POST'])
-    def chat():
+    def chat() -> Response:
         openAI = OpenAIClient()
         client = openAI.get_client()
 
@@ -39,7 +39,7 @@ def init_app(Debug=False):
     def asistente_elicitacion():
         session.pop('THREAD_ID', None)
 
-        return render_template('asistente.html')
+        return render_template('elicitacion.html')
 
     @app.route('/analisis_escenarios', methods=['GET', 'POST'])
     def analisis_escenarios():
