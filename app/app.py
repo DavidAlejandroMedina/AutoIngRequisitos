@@ -1,4 +1,4 @@
-from flask import Flask,Response, jsonify, render_template, request, session
+from flask import Flask,Response, jsonify, render_template, request, session, redirect
 from .src.escenarios import search
 from dotenv import load_dotenv
 from decouple import config
