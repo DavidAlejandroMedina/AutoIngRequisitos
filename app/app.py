@@ -1,7 +1,9 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask,Response, jsonify, render_template, request, session
 from .src.escenarios import search
 from dotenv import load_dotenv
 from decouple import config
+from app.api_info import OpenAIClient
+from app.src.elicitacion import consult, create_thread
 from werkzeug.utils import secure_filename
 from .src.pdf import allow_extensions, pdf_plus_question
 import os
@@ -9,11 +11,12 @@ import os
 
 conversation = []
 
-def init_app():
-    # Carga las variables de entorno
-    load_dotenv()
+def init_app(Debug=False):
+    
+    secret_key_hex = os.urandom(24).hex()
 
     app = Flask(__name__)
+    app.secret_key = secret_key_hex
     app.config['OPENAI_API_KEY'] = os.getenv('OPENAI_API_KEY')
     api_key = app.config.get('OPENAI_API_KEY')
     app.config['UPLOAD_FOLDER'] = os.getenv('UPLOAD_FOLDER')
@@ -22,18 +25,37 @@ def init_app():
     def home():
         return render_template('inicio.html')
 
+        
+    @app.route('/chat', methods=['POST'])
+    def chat() -> Response:
+        openAI = OpenAIClient()
+        client = openAI.get_client()
+
+        if 'THREAD_ID' not in session:
+            session['THREAD_ID'] = create_thread(client).id
+
+        user_message = request.json.get('message')
+        response_json = consult(user_message, session['THREAD_ID'], openAI)
+  
+        return jsonify(response_json)
+
+
     @app.route('/asistente_elicitacion')
     def asistente_elicitacion():
-        return render_template('asistente.html')
+        session.pop('THREAD_ID', None)
+
+        return render_template('elicitacion.html')
 
     @app.route('/analisis_escenarios', methods=['GET', 'POST'])
     def analisis_escenarios():
+        client = OpenAIClient().get_client
+        
         if request.method == 'GET':
             return render_template('escenarios.html')
         
         if request.form['input']:
             question = 'Yo: '+ request.form['input']
-            answer = 'IA: '+ search(question, api_key)
+            answer = 'IA: '+ search(question, client)
             
             conversation.append(question)
             conversation.append(answer)
