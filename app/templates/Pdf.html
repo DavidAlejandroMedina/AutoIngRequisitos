@@ -1,0 +1,21 @@
+{% extends "./index.html" %}
+
+{% block title %}ELICITACIÓN{% endblock %}
+
+{% block body %}
+
+    <h1>PRUEBA CARGAR ARCHIVO</h1> 
+    <form action="/cargar_archivo" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" accept=".pdf" required/>
+        <input type="text" name="input" required/>
+        <input type="submit" value="Upload">
+    </form>
+
+    <label>
+        <input class="input" type="text" name="Output" placeholder="">
+        <span>Output</span>
+        {% for c in chat %}
+            <p>{{ c }}</p>
+        {% endfor %}
+    </label>
+{% endblock %}
