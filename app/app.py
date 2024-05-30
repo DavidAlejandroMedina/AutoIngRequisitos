@@ -47,11 +47,7 @@ def init_app():
         if request.method=='GET':
             return render_template('Pdf.html')
         
-        if request.method == 'POST':
-            # Chekeo que exista el archivo
-            if not('file' in request.files):
-                print('No se subio el archivo')
-                return redirect(request.url)
+        if request.method == 'POST' and not('file' in request.files):
             
             file = request.files['file']
             #print(file)
@@ -75,6 +71,9 @@ def init_app():
                 answer = 'IA: '+ pdf_plus_question(path=os.path.join(app.config['UPLOAD_FOLDER']),pdf=fileName,question=request.form['input'],api_key=api_key)
             
             return redirect(request.url)
+        elif request.form['input']:
+            # Integrar consulta solo por promt
+            pass 
         else:
             return redirect(request.url)
     
