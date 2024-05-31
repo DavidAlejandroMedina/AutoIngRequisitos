@@ -1,6 +1,13 @@
 const chatSubmitBtn = document.getElementById("chat-submit");
-
 chatSubmitBtn.addEventListener("click", sendMessage);
+
+const inputChat = document.getElementById("user-input")
+inputChat.addEventListener("keydown", function(event){
+  if (event.key === 'Enter') {
+    sendMessage();
+  }
+})
+
 
 async function sendMessage() {
   const userInput = document.getElementById("user-input").value;
@@ -23,10 +30,15 @@ async function sendMessage() {
   });
   const data = await response.json();
 
+  console.log(data.message)
+
   const assistantMessageDiv = document.createElement("div");
   assistantMessageDiv.className = "assistant-message";
   assistantMessageDiv.textContent = data.message;
+  const boldMessage = data.message.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+  assistantMessageDiv.innerHTML = boldMessage.replace(/\n/g, '<br>');
   chatBox.appendChild(assistantMessageDiv);
+  
 
   chatBox.scrollTop = chatBox.scrollHeight;
 }

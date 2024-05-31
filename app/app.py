@@ -14,7 +14,7 @@ def init_app(Debug=False):
 
     app = Flask(__name__)
     app.secret_key = secret_key_hex
-
+    openAI = OpenAIClient()
 
     @app.route('/')
     def home():
@@ -23,7 +23,6 @@ def init_app(Debug=False):
         
     @app.route('/chat', methods=['POST'])
     def chat() -> Response:
-        openAI = OpenAIClient()
         client = openAI.get_client()
 
         if 'THREAD_ID' not in session:
@@ -43,7 +42,7 @@ def init_app(Debug=False):
 
     @app.route('/analisis_escenarios', methods=['GET', 'POST'])
     def analisis_escenarios():
-        client = OpenAIClient().get_client
+        client = openAI.get_client()
         
         if request.method == 'GET':
             return render_template('escenarios.html')

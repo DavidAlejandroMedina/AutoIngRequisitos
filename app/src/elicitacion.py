@@ -4,6 +4,7 @@ def create_thread(client):
 def consult(user_message, thread_id, openAI):
     client = openAI.get_client()
     assistant_id = openAI.get_elicitation_id()
+    
 
     message = client.beta.threads.messages.create(
         thread_id=thread_id,
