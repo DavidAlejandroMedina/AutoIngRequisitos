@@ -1,5 +1,5 @@
 import os
-from flask import current_app as app, jsonify, render_template, request, session
+from flask import Flask, current_app as app, jsonify, render_template, request, session
 
 from requerimentsapp.api_info import OpenAIClient
 from requerimentsapp.src.openAIChat import consult, create_thread_elit, create_thread_req
@@ -11,7 +11,7 @@ import markdown.extensions.fenced_code
 conversation = []
 openAI = OpenAIClient()
 TEMP_FOLDER = 'temp'
-
+app = Flask(__name__)
 
 @app.route('/')
 def home():
