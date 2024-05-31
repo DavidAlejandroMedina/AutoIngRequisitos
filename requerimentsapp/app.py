@@ -51,7 +51,7 @@ def create_app():
 
     
         os.remove(temp_file_path)
-
+        print(response)
         return jsonify(response)
 
     @app.route('/asistente_requerimientos')
