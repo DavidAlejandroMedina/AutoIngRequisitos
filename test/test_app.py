@@ -77,7 +77,7 @@ def test_upload_file(client: FlaskClient):
     TEMP_FOLDER = 'temp'
 
     with tempfile.NamedTemporaryFile(suffix='.pdf') as temp_pdf:
-        temp_pdf.write(b'%PDF-1.4 mock pdf content')
+        temp_pdf.write(b'mock pdf content')
         temp_pdf.seek(0)
 
         data = {
