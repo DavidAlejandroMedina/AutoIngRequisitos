@@ -1,11 +1,29 @@
-def create_thread(client):
+def create_thread_elit(client):
     return client.beta.threads.create()
 
-def consult(user_message, thread_id, openAI):
-    client = openAI.get_client()
-    assistant_id = openAI.get_elicitation_id()
-    
+def create_thread_req(file, user_message, client):
+    message_file = client.files.create(
+    file=open(file, "rb"), 
+    purpose="assistants")
 
+
+    thread = client.beta.threads.create(
+        messages=[
+            {
+                "role": "user",
+                "content": user_message,
+                "attachments": [
+                    { "file_id": message_file.id, "tools": [{"type": "file_search"}] }
+                ],
+            }
+        ]
+    )
+
+    return thread
+
+
+def consult(user_message, thread_id, assistant_id, client):
+    
     message = client.beta.threads.messages.create(
         thread_id=thread_id,
         role="user",
@@ -26,6 +44,6 @@ def consult(user_message, thread_id, openAI):
                 assistant_answer = message.content[0].text.value
                 break
     else:
-        assistant_answer = 'No he logrado responder a la pregunta\n (Error:{run.status})'
+        assistant_answer = f'No he logrado responder a la pregunta\n (Error:{run.status})'
 
     return {'message': assistant_answer}

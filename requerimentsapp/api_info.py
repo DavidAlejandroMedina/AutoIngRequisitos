@@ -14,7 +14,7 @@ class OpenAIClient:
 
     def __init__(self):
         if not self._api_key:
-            raise ValueError("API key not found. Set the OPENAI_API_KEY environment variable.")
+            raise ValueError("Clave de API no encontrada.")
         
         self._client = OpenAI(api_key=self._api_key)
 
@@ -26,6 +26,6 @@ class OpenAIClient:
     
     def get_requeriment_id(self):
         return self._requeriment_id
-
+    
 
 
