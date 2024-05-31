@@ -41,8 +41,8 @@ def upload_file():
     response = consult(user_message, session['THREAD_REQ_ID'], ASSIT_REQ_ID, client)
 
 
-    if not file:
-        os.remove(temp_file_path)
+   
+    os.remove(temp_file_path)
 
 
     return jsonify(response)
