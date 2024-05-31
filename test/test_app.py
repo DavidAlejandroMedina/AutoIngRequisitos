@@ -5,7 +5,7 @@ import os
 import pytest
 import tempfile
 from unittest.mock import MagicMock
-from requerimentsapp import create_app
+from requerimentsapp.app import create_app
 from requerimentsapp.src.openAIChat import consult
 
 @pytest.fixture
