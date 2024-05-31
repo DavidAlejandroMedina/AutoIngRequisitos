@@ -1,5 +1,6 @@
+import json
 import os
-from flask import Flask, current_app as app, jsonify, render_template, request, session
+from flask import Flask, Response, current_app as app, render_template, request, session
 
 from requerimentsapp.api_info import OpenAIClient
 from requerimentsapp.src.openAIChat import consult, create_thread_elit, create_thread_req
@@ -51,8 +52,9 @@ def create_app():
 
     
         os.remove(temp_file_path)
-        print(response)
-        return jsonify(response)
+
+        response_json = json.dumps(response)
+        return Response(response_json, status=200, mimetype='application/json')
 
     @app.route('/asistente_requerimientos')
     def asistente_requerimientos():
@@ -73,7 +75,8 @@ def create_app():
 
         response = consult(user_message, session['THREAD_ELI_ID'], ASSIT_ELIT_ID, client)
 
-        return jsonify(response)
+        response_json = json.dumps(response)
+        return Response(response_json, status=200, mimetype='application/json')
 
 
     @app.route('/asistente_elicitacion')
