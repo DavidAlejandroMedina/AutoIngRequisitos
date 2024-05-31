@@ -14,7 +14,6 @@ def search(question, client):
     answer = client.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=messages,
-        max_tokens=150,
         temperature=1,
         n=1,
         stop=None,
