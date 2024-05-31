@@ -40,6 +40,7 @@ async function sendFile() {
     body: formData
   })
   const data = await response.json();
+  print(data.message)
 
   const assistantMessageDiv = document.createElement("div");
   assistantMessageDiv.className = "assistant-message";
