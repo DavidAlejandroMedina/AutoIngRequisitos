@@ -112,7 +112,7 @@ input[type="file"]::file-selector-button:hover {
     justify-content: center;
     height: 1.63em;
     padding: 10px 20px;
-    margin-left: -70px;
+    margin-left: -20px;
     border-radius: 0 5px 5px 0;
     border-top: 1px solid #dddddd78; 
     border-bottom: 1px solid #dddddd78; 

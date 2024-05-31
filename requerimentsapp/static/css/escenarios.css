@@ -8,15 +8,16 @@
     padding: 1px 280px;
     border-radius: 10px;
     position: relative;
-    background-color: #1a1a1a;
+    /* background-color: #1a1a1a; */
     color: #e8e8e8;
-    border: 1px solid #333;
+    /* border: 1px solid #333; */
 }
 
 .input-wrapper {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-left: 20px;
 }
 
 input {
@@ -24,10 +25,11 @@ input {
 }
 
 input[type="text"] {
-    width: calc(100% - 30em);
-    flex: 2;
+    width: calc(100% - 80em);
+    flex: 3;
     height: 1rem;
     padding: 15px;
+    padding-right: 110px;
     margin-right: 10px;
     border-radius: 5px;
     border-top: 1px solid #dddddd78; 
@@ -47,14 +49,21 @@ input[type="text"]:focus {
     width: 18px;
 }
 
+.button-submit{
+    align-items: center;
+    justify-content: space-between;
+    z-index: 0;
+}
+
 #chat-submit {
     display: flex;
     align-items: center;
-    justify-content: center;
-    height: 1.63em;
+    position: absolute;
+    /* justify-content: center; */
+    height: 1.93em;
     padding: 10px 20px;
-    margin-left: -70px;
-    /* margin-top: 12px; */
+    margin-left: -22px;
+    margin-top: -24px;
     border-radius: 0 5px 5px 0;
     border-top: 1px solid #dddddd78; 
     border-bottom: 1px solid #dddddd78; 
@@ -62,8 +71,8 @@ input[type="text"]:focus {
     background-color: #2e2e2e;
     color: #ffffff;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-    outline: none;
+    /* transition: background-color 0.3s ease; */
+    /* outline: none; */
 }
 
 #chat-submit:hover {

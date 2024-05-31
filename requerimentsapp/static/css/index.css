@@ -15,7 +15,7 @@ h1 {
     margin-bottom: 30px;
 }
 
-button {
+.button_start {
     /* Variables */
     --button_radius: 0.75em;
     --button_color: #212121;
@@ -27,6 +27,7 @@ button {
     border-radius: var(--button_radius);
     background: var(--button_outline_color);
     margin-bottom: 18px;
+    cursor: pointer;
 }
 
 .button_top {
@@ -41,12 +42,12 @@ button {
     transition: transform 0.1s ease;
 }
 
-button:hover .button_top {
+.button_start:hover .button_top {
     /* Pull the button upwards when hovered */
     transform: translateY(-0.33em);
 }
 
-button:active .button_top {
+.button_start:active .button_top {
     /* Push the button downwards when pressed */
     transform: translateY(0);
 }

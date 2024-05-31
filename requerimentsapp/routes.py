@@ -37,13 +37,10 @@ def upload_file():
         session['THREAD_REQ_ID'] = create_thread_req(temp_file_path, user_message, client).id
 
         
-
     response = consult(user_message, session['THREAD_REQ_ID'], ASSIT_REQ_ID, client)
-
 
     if not file:
         os.remove(temp_file_path)
-
 
     return jsonify(response)
 
@@ -83,9 +80,8 @@ def analisis_escenarios():
         return render_template('escenarios.html')
     
     if request.form['input']:
-        question = 'Yo: '+ request.form['input']
-        answer = 'IA: '+ search(question, client)
-        
+        question = request.form['input']
+        answer = search(question, client)
         answer_decode = markdown.markdown(answer, extensions=['fenced_code'])
         
         conversation.append(question)
