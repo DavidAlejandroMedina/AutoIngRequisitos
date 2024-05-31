@@ -3,7 +3,8 @@ from app.api_info import OpenAIClient
 from app.src.elicitacion import consult, create_thread
 from flask import Flask, Response, jsonify, render_template, request, session
 from .src.escenarios import search
-
+import markdown
+import markdown.extensions.fenced_code
 
 
 conversation = []
@@ -48,11 +49,13 @@ def init_app(Debug=False):
             return render_template('escenarios.html')
         
         if request.form['input']:
-            question = 'Yo: '+ request.form['input']
-            answer = 'IA: '+ search(question, client)
+            question = request.form['input']
+            answer = search(question, client)
+            
+            answer_decode = markdown.markdown(answer, extensions=['fenced_code'])
             
             conversation.append(question)
-            conversation.append(answer)
+            conversation.append(answer_decode)
             
             return render_template('escenarios.html', chat = conversation)
         else:
