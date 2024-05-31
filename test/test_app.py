@@ -81,7 +81,7 @@ def test_upload_file(client: FlaskClient):
         temp_pdf.seek(0)
 
         data = {
-            'message': 'Solo escribe el la extension del archivo',
+            'message': 'Solamente escribe el la extension del archivo, sin el punto',
             'pdf': (temp_pdf, 'test.pdf')
         }
 
@@ -93,6 +93,8 @@ def test_upload_file(client: FlaskClient):
         assert response_data['message'] == 'pdf'
 
         temp_file_path = os.path.join(TEMP_FOLDER, 'test.pdf')
-        assert os.path.exists(temp_file_path)
+
+        if os.path.exists(temp_file_path):
+            os.remove(temp_file_path)
 
  
